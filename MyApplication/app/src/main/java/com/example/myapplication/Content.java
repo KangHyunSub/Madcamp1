@@ -76,7 +76,7 @@ public class Content extends Fragment {
         plus.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this, sub.class);
+                Intent intent = new Intent(Content.this, sub.class);
                 startActivity(intent);
             }
 
