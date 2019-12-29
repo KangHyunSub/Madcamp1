@@ -23,13 +23,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
-
-
+import android.widget.Toast;
 
 
 public class Content extends Fragment {
     private Button plus;
     private ListView m_oListView=null;
+    private static final int REQUEST_CODE=3;
     List named = new ArrayList();
     List numberd = new ArrayList();
     public  List<PhoneBook>getContacts(Context context){
@@ -107,7 +107,7 @@ public class Content extends Fragment {
 
 
         //새 연락처
-
+/*
         Intent intent =getActivity().getIntent();
         String str1 =intent.getStringExtra("fn");
         String str3 =intent.getStringExtra("pn");
@@ -115,6 +115,8 @@ public class Content extends Fragment {
             named.add(str1);
             numberd.add(str3);
         }
+
+ */
 
         ArrayList<ItemData> oData = new ArrayList<>();
 
@@ -138,12 +140,44 @@ public class Content extends Fragment {
         plus.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(getActivity(), sub.class);
-                startActivity(intent);
+                Intent intent = new Intent(getActivity().getApplicationContext(), sub.class);
+                startActivityForResult(intent,REQUEST_CODE);
             }
 
         });
 
         return view;
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+/*
+        if(resultCode==-1){
+            Toast.makeText(getActivity().getApplicationContext(),"수신 성공",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(getActivity().getApplicationContext(),"수신 실패",Toast.LENGTH_SHORT).show();
+        }
+
+
+ */
+        if(requestCode ==REQUEST_CODE){
+            String str1 =data.getStringExtra("fn");
+            String str3 =data.getStringExtra("pn");
+            named.add(str1);
+            numberd.add(str3);
+            ArrayList<ItemData> oData = new ArrayList<>();
+
+            int len=named.size();
+            for (int i=0; i<len; i++) {
+                ItemData oItem = new ItemData();
+                oItem.strTitle = named.get(i).toString();
+                oItem.strDate = numberd.get(i).toString();
+                oData.add(oItem);
+            }
+            ListAdapter oAdapter = new ListAdapter(oData);
+            m_oListView.setAdapter(oAdapter);
+            oAdapter.notifyDataSetChanged();
+
+        }
     }
 }
