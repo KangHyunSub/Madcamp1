@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.basic.content;
+import com.example.basic.Content;
 import com.example.basic.Else;
 import com.example.basic.Gallery;
 import com.example.basic.R;
@@ -31,7 +31,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position==0)
-            return new content();
+            return new Content();
         else if (position==1)
             return new Gallery();
         else

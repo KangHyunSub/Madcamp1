@@ -27,7 +27,7 @@ import android.provider.ContactsContract;
 
 
 
-public class content extends Fragment {
+public class Content extends Fragment {
     private Button plus;
     private ListView m_oListView=null;
     List named = new ArrayList();
@@ -37,6 +37,7 @@ public class content extends Fragment {
         List<PhoneBook> datas = new ArrayList<>();
 
         // 1. Resolver 가져오기(데이터베이스 열어주기)
+        // 전화번호부에 이미 만들어져 있는 ContentProvider 를 통해 데이터를 가져올 수 있음
         // 전화번호부에 이미 만들어져 있는 ContentProvider 를 통해 데이터를 가져올 수 있음
         // 다른 앱에 데이터를 제공할 수 있도록 하고 싶으면 ContentProvider 를 설정
         // 핸드폰 기본 앱 들 중 데이터가 존재하는 앱들은 Content Provider 를 갖는다

@@ -38,7 +38,7 @@ public class sub extends Fragment {
             public void onClick(View v) {
                 str1 = first_name.getText().toString();
                 str3 = phone_number.getText().toString();
-                Intent intent = new Intent(getActivity(), content.class);
+                Intent intent = new Intent(getActivity(), Content.class);
                 intent.putExtra("fn", str1);
                 intent.putExtra("pn", str3);
                 startActivity(intent);
