@@ -1,5 +1,6 @@
 package com.example.basic;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -18,6 +19,7 @@ import android.view.View;
 import com.example.basic.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends FragmentActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

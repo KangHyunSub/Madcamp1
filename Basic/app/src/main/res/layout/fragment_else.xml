@@ -11,9 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Drink"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="170dp"
         android:background="#32a9d9"
         android:layout_gravity="center_vertical|center_horizontal"/>
+
 
     <ImageView
         android:id="@+id/imageView"
@@ -22,10 +23,6 @@
         android:layout_gravity="center_vertical|center_horizontal"
         android:layout_marginTop="-40dp"
         android:src="@drawable/water_1" />
-
-
-
-
 
 
     <TextView
