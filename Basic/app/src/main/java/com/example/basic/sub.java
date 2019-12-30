@@ -1,5 +1,6 @@
 package com.example.basic;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +12,9 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-public class sub extends Fragment {
+import static android.app.Activity.RESULT_OK;
+
+public class sub extends Activity {
     private Button btn_move;
     private EditText first_name;
     private EditText phone_number;
@@ -19,33 +22,37 @@ public class sub extends Fragment {
     private String str3;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sub);
+        first_name = findViewById(R.id.first_name);
+        phone_number = findViewById(R.id.phone_number);
 
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_sub,
-                container,
-                false);
-        first_name = view.findViewById(R.id.first_name);
-        phone_number = view.findViewById(R.id.phone_number);
-
-        btn_move = view.findViewById(R.id.btn_move);
+        btn_move = findViewById(R.id.btn_move);
         btn_move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 str1 = first_name.getText().toString();
                 str3 = phone_number.getText().toString();
-                Intent intent = new Intent(getActivity(), Content.class);
+                Intent intent = new Intent();
                 intent.putExtra("fn", str1);
                 intent.putExtra("pn", str3);
-                startActivity(intent);
+                setResult(RESULT_OK,intent);
+                finish();
 
             }
 
         });
+    }
+/*
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_sub,
+                container,
+                false);
+
         return view;
     }
+    */
+
 }

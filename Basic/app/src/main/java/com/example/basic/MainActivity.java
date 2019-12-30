@@ -15,11 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.basic.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends FragmentActivity {
-
+    private long backBtnTime=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,5 +40,20 @@ public class MainActivity extends FragmentActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        long curTime=System.currentTimeMillis();
+        long gapTime=curTime-backBtnTime;
+
+        if(0<=gapTime && 2000>=gapTime){
+            super.onBackPressed();
+        }
+        else {
+            backBtnTime=curTime;
+            Toast.makeText(this,"한번더 누르면 종료 됩니다.",Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
