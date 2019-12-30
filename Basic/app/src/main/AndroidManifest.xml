@@ -19,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".content" />
+        <activity android:name=".Content" />
+        <activity android:name=".FullScreenImageActivity" />
     </application>
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
