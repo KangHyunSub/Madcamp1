@@ -1,16 +1,24 @@
 package com.example.basic;
 
 
+import android.Manifest;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import android.os.Bundle;
@@ -19,6 +27,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+
 import java.util.ArrayList;
 
 
@@ -26,6 +36,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class Gallery extends Fragment {
+
 
     public final Integer images_ids[] = {
             R.drawable.pic_1, R.drawable.pic_2,
@@ -47,8 +58,11 @@ public class Gallery extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         MainActivity main = (MainActivity) getActivity();
         View galleryView = inflater.inflate(R.layout.fragment_gallery, null);
+
 
         RecyclerView recyclerView = (RecyclerView) galleryView.findViewById(R.id.gallery);
         recyclerView.setHasFixedSize(true);
@@ -72,4 +86,6 @@ public class Gallery extends Fragment {
 
         return theimage;
     }
+
+
 }

@@ -163,20 +163,35 @@ public class Content extends Fragment {
         if(requestCode ==REQUEST_CODE){
             String str1 =data.getStringExtra("fn");
             String str3 =data.getStringExtra("pn");
-            named.add(str1);
-            numberd.add(str3);
-            ArrayList<ItemData> oData = new ArrayList<>();
+            if (str1!=null) {
+                named.add(str1);
+                numberd.add(str3);
 
-            int len=named.size();
-            for (int i=0; i<len; i++) {
-                ItemData oItem = new ItemData();
-                oItem.strTitle = named.get(i).toString();
-                oItem.strDate = numberd.get(i).toString();
-                oData.add(oItem);
+                ArrayList<ItemData> oData = new ArrayList<>();
+                int len = named.size();
+                for (int i = 0; i < len; i++) {
+                    ItemData oItem = new ItemData();
+                    oItem.strTitle = named.get(i).toString();
+                    oItem.strDate = numberd.get(i).toString();
+                    oData.add(oItem);
+                }
+                ListAdapter oAdapter = new ListAdapter(oData);
+                m_oListView.setAdapter(oAdapter);
+                oAdapter.notifyDataSetChanged();
+            }else{
+                ArrayList<ItemData> oData = new ArrayList<>();
+                int len = named.size();
+                for (int i = 0; i < len; i++) {
+                    ItemData oItem = new ItemData();
+                    oItem.strTitle = named.get(i).toString();
+                    oItem.strDate = numberd.get(i).toString();
+                    oData.add(oItem);
+                }
+                ListAdapter oAdapter = new ListAdapter(oData);
+                m_oListView.setAdapter(oAdapter);
+                oAdapter.notifyDataSetChanged();
+
             }
-            ListAdapter oAdapter = new ListAdapter(oData);
-            m_oListView.setAdapter(oAdapter);
-            oAdapter.notifyDataSetChanged();
 
         }
     }

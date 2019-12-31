@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import static android.app.Activity.RESULT_OK;
 
 public class sub extends Activity {
-    private Button btn_move;
+    private Button btn_move,btn;
     private EditText first_name;
     private EditText phone_number;
     private String str1;
@@ -42,6 +42,15 @@ public class sub extends Activity {
 
             }
 
+        });
+        btn=findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent dintent =new Intent();
+                setResult(RESULT_OK, dintent);
+                finish();
+            }
         });
     }
 /*

@@ -19,5 +19,7 @@ public class Cell {
     public void setImg(Integer img) {
         this.img = img;
     }
+
+
 }
 

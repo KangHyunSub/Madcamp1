@@ -1,24 +1,18 @@
 package com.example.basic;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
-import static com.example.basic.R.drawable.pic_1;
+import androidx.viewpager.widget.ViewPager;
+
+import static android.os.SystemClock.sleep;
 
 public class FullScreenImageActivity extends Activity {
+
+    private ViewPager viewPager;
+    private FullScreenImageAdapter adapter;
 
     public final Integer images_ids[] = {
             R.drawable.pic_1, R.drawable.pic_2,
@@ -39,21 +33,18 @@ public class FullScreenImageActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_full_screen_image);
+
+
+        //ImageView image = (ImageView) findViewById(R.id.imgDisplay);
+        viewPager = findViewById(R.id.pager);
+        adapter = new FullScreenImageAdapter(this);
+        viewPager.setAdapter(adapter);
+    };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         Integer image_id = getIntent().getIntExtra("picture", 0);
-
-
-        ImageView image = (ImageView) findViewById(R.id.fullScreenimageView);
-
-        Drawable drawable = getResources().getDrawable(images_ids[image_id]);
-        image.setImageDrawable(drawable);
-//        viewHolder.img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//        viewHolder.img.setImageResource(galleryList.get(i).getImg());
-
-//        Intent callingActivityIntent = getIntent();
-//        if (callingActivityIntent != null) {
-        //Context context= this.getApplicationContext();
-//            if (fullScreenImageView != null) {
-//            }
-//        }
-    }
+        viewPager.setCurrentItem(image_id);
+    };
 }
