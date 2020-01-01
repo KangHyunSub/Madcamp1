@@ -257,15 +257,15 @@ public class Else extends Fragment {
 
         NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(NOTIFICATION_SERVICE);
 
-        Intent notificationIntent = new Intent(getActivity(), ResultActivity.class);
+        Intent notificationIntent = new Intent(getActivity(),MainActivity.class);
         notificationIntent.putExtra("notificationId", count); //전달할 값
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK) ;
         PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, notificationIntent,  PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), NOTIFICATION_CHANNEL_ID)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.icon_bottle)) //BitMap 이미지 요구
-                .setContentTitle("물을 안마신지"+k+"시간이 지났습니다.")
-                .setContentText("물마시셈")
+                .setContentTitle(k+" hours have passed since you drank water!")
+                .setContentText("Aim to drink 8 cups of water a day :)")
                 // 더 많은 내용이라서 일부만 보여줘야 하는 경우 아래 주석을 제거하면 setContentText에 있는 문자열 대신 아래 문자열을 보여줌
                 //.setStyle(new NotificationCompat.BigTextStyle().bigText("더 많은 내용을 보여줘야 하는 경우..."))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
