@@ -1,4 +1,4 @@
-package com.example.tab2;
+package com.example.myapplication;
 
 public class Cell {
     private String title;

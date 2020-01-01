@@ -71,16 +71,38 @@ public class Else extends Fragment {
         View waterView = inflater.inflate(R.layout.fragment_else, container, false);
         Button button = (Button) waterView.findViewById(R.id.button);
         Button resetbutton = (Button) waterView.findViewById(R.id.resetbutton);
+        waveLoadingView = (WaveLoadingView) waterView.findViewById(R.id.waveLoadingView);
 
+        final TextView textView = (TextView) waterView.findViewById(R.id.textView);
+
+        resetbutton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                index = 0;
+                Activity myActivity=(Activity) container.getContext();
+                SharedPreferences a = PreferenceManager.getDefaultSharedPreferences(myActivity);
+                SharedPreferences.Editor editor = a.edit();
+                editor.putInt("i", index);
+                editor.apply();
+
+                double percentage = index / 8 * 100;
+                textView.setText(String.format("%.0f", percentage) + " %");
+                waveLoadingView.setProgressValue((int) percentage);
+
+                AppWidgetManager mgr = AppWidgetManager.getInstance(getContext());
+                Intent update = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                update.setClass(getContext(), ExampleAppWidgetProvider.class);
+                update.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, mgr.getAppWidgetIds(new ComponentName(getContext(), ExampleAppWidgetProvider.class)));
+                getContext().sendBroadcast(update);
+            };
+        });
 
         a = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
         int i = a.getInt("i", 0);
 
         index = i;
 
-        waveLoadingView = (WaveLoadingView) waterView.findViewById(R.id.waveLoadingView);
 
-        final TextView textView = (TextView) waterView.findViewById(R.id.textView);
         if (index >=8) {
 
             double percentage = 8.0 / 8.0 * 100;
@@ -92,22 +114,8 @@ public class Else extends Fragment {
             textView.setText(String.format("%.0f", percentage) + " %");
         }
 
-//
-//        resetbutton.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view) {
-//                index = 0;
-//                Activity myActivity=(Activity) container.getContext();
-//                SharedPreferences a = PreferenceManager.getDefaultSharedPreferences(myActivity);
-//                SharedPreferences.Editor editor = a.edit();
-//                editor.putInt("i", index);
-//                editor.apply();
-//
-//                double percentage = index / 8 * 100;
-//                textView.setText(String.format("%.0f", percentage) + " %");
-//                waveLoadingView.setProgressValue((int) percentage);
-//            };
-//        });
+
+
 
         Timer timer = new Timer();
         // Creates a Calendar object that specifies a specific time of day
@@ -145,15 +153,40 @@ public class Else extends Fragment {
                             button.setOnClickListener(new View.OnClickListener(){
                                 @Override
                                 public void onClick(View v){
+                                    index += 1;
+
+                                    Activity myActivity=(Activity)(view.getContext());
+                                    SharedPreferences a = PreferenceManager.getDefaultSharedPreferences(myActivity);
+                                    SharedPreferences.Editor editor = a.edit();
+                                    editor.putInt("i", index);
+                                    editor.apply();
+
+                                    AppWidgetManager mgr = AppWidgetManager.getInstance(getContext());
+                                    Intent update = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                                    update.setClass(getContext(), ExampleAppWidgetProvider.class);
+                                    update.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, mgr.getAppWidgetIds(new ComponentName(getContext(), ExampleAppWidgetProvider.class)));
+                                    getContext().sendBroadcast(update);
+
+                                    if (index >= 8) {
+                                        Toast toast = Toast.makeText(getActivity(), "Congratulations! You drank 8 cups of Water!", Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                        double percentage = 8 / 8 * 100;
+                                        textView.setText(String.format("%.0f", percentage) + " %");
+                                        waveLoadingView.setProgressValue((int) percentage);
+                                    } else {
+                                        waveLoadingView.setProgressValue(index);
+                                        double percentage = index / 8.0 * 100;
+                                        textView.setText(String.format("%.0f", percentage) + " %");
+                                        waveLoadingView.setProgressValue((int) percentage);
+                                    }
+
+
+
                                     isThread=false;
                                     interrupt();
                                     k=0;
-                                    //try {
-                                    //   thread.join(10000);
-                                    //   i=1;
-                                    //} catch (InterruptedException e) {
-                                    //    e.printStackTrace();
-                                    //  }
+
                                 }
                             });
                             try {
@@ -164,13 +197,10 @@ public class Else extends Fragment {
                                 e.printStackTrace();
                             }
                             isThread=true;
+
                         }
                     }
                 };
-                thread.start();
-
-
-                count++;
                 index += 1;
 
                 Activity myActivity=(Activity)(view.getContext());
@@ -178,6 +208,17 @@ public class Else extends Fragment {
                 SharedPreferences.Editor editor = a.edit();
                 editor.putInt("i", index);
                 editor.apply();
+                thread.start();
+////
+////
+////                count++;
+//                index += 1;
+//
+//                Activity myActivity=(Activity)(view.getContext());
+//                SharedPreferences a = PreferenceManager.getDefaultSharedPreferences(myActivity);
+//                SharedPreferences.Editor editor = a.edit();
+//                editor.putInt("i", index);
+//                editor.apply();
 
 
                 AppWidgetManager mgr = AppWidgetManager.getInstance(getContext());

@@ -1,20 +1,17 @@
-package com.example.tab2;
+package com.example.myapplication;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-//import android.view.ViewHolder;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.content.Context;
-import android.widget.Toast;
-import java.util.ArrayList;
-import android.graphics.Canvas;
-
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+//import android.view.ViewHolder;
 
 public class ImageAdapter extends  RecyclerView.Adapter<ImageAdapter.ViewHolder> {
     private ArrayList<Cell> galleryList;
